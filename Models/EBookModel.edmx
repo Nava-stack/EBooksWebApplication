@@ -1,0 +1,1374 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EBooks_DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nic" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactNo" Type="int" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="userID_fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookCategory">
+          <Key>
+            <PropertyRef Name="bookCatID" />
+          </Key>
+          <Property Name="bookCatID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="category" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookDetails">
+          <Key>
+            <PropertyRef Name="bookID" />
+          </Key>
+          <Property Name="bookID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="author" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="genre" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="publisher" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="pubYear" Type="int" Nullable="false" />
+          <Property Name="unitPrice" Type="float" Nullable="false" />
+          <Property Name="description" Type="varchar" MaxLength="300" Nullable="false" />
+          <Property Name="bookCatID_fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookInventory">
+          <Key>
+            <PropertyRef Name="inventID" />
+          </Key>
+          <Property Name="inventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookID_fk" Type="int" Nullable="false" />
+          <Property Name="supplierID_fk" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="purchasePrice" Type="float" Nullable="false" />
+          <Property Name="salesPrice" Type="float" Nullable="false" />
+          <Property Name="updatedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookOffer">
+          <Key>
+            <PropertyRef Name="offerID" />
+          </Key>
+          <Property Name="offerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookID_fk" Type="int" Nullable="false" />
+          <Property Name="offerPercent" Type="float" Nullable="false" />
+          <Property Name="updatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookStock">
+          <Key>
+            <PropertyRef Name="stockID" />
+          </Key>
+          <Property Name="stockID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bookID_fk" Type="int" Nullable="false" />
+          <Property Name="availableQty" Type="int" Nullable="false" />
+          <Property Name="updatedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartID" />
+          </Key>
+          <Property Name="cartID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="totalAmount" Type="float" Nullable="false" />
+          <Property Name="updatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CartDetails">
+          <Key>
+            <PropertyRef Name="cartDetailsID" />
+          </Key>
+          <Property Name="cartDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cartID_fk" Type="int" Nullable="false" />
+          <Property Name="cusID_fk" Type="int" Nullable="false" />
+          <Property Name="bookID_fk" Type="int" Nullable="false" />
+          <Property Name="addedDate" Type="date" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cusID" />
+          </Key>
+          <Property Name="cusID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="nic" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactNo" Type="int" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="userID_fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderBookDetails">
+          <Key>
+            <PropertyRef Name="ordBookDetailsID" />
+          </Key>
+          <Property Name="ordBookDetailsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ordID_fk" Type="int" Nullable="false" />
+          <Property Name="bookID_fk" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" Nullable="false" />
+          <Property Name="totalPrice" Type="float" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cusID_fk" Type="int" Nullable="false" />
+          <Property Name="totalAmount" Type="float" Nullable="false" />
+          <Property Name="dateOfOrder" Type="date" Nullable="false" />
+          <Property Name="ordSttsID_fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderStatus">
+          <Key>
+            <PropertyRef Name="ordSttsID" />
+          </Key>
+          <Property Name="ordSttsID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="payMethodID" />
+          </Key>
+          <Property Name="payMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="method" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Payments">
+          <Key>
+            <PropertyRef Name="payID" />
+          </Key>
+          <Property Name="payID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ordID_fk" Type="int" Nullable="false" />
+          <Property Name="amount" Type="float" Nullable="false" />
+          <Property Name="dateOfPay" Type="datetime" Nullable="false" />
+          <Property Name="payMethodID_fk" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Return">
+          <Key>
+            <PropertyRef Name="returnID" />
+          </Key>
+          <Property Name="returnID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="requestID_fk" Type="int" Nullable="false" />
+          <Property Name="returnDate" Type="date" Nullable="false" />
+          <Property Name="refundAmount" Type="float" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ReturnRequest">
+          <Key>
+            <PropertyRef Name="requestID" />
+          </Key>
+          <Property Name="requestID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ordID_fk" Type="int" Nullable="false" />
+          <Property Name="reason" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="dateOfRequest" Type="date" Nullable="false" />
+          <Property Name="status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="reviewID" />
+          </Key>
+          <Property Name="reviewID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ordBookDetailsID_fk" Type="int" Nullable="false" />
+          <Property Name="comments" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="rating" Type="float" Nullable="false" />
+          <Property Name="dateOfReview" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="supplierID" />
+          </Key>
+          <Property Name="supplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="200" Nullable="false" />
+          <Property Name="mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contactNo" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="roleID_fk" Type="int" Nullable="false" />
+          <Property Name="username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="createdDate" Type="datetime" Nullable="false" />
+          <Property Name="updatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Admin_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="userID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookDetails_BookCategory">
+          <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="1" />
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookCategory">
+              <PropertyRef Name="bookCatID" />
+            </Principal>
+            <Dependent Role="BookDetails">
+              <PropertyRef Name="bookCatID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInventory_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="1" />
+          <End Role="BookInventory" Type="Self.BookInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="BookInventory">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInventory_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="BookInventory" Type="Self.BookInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierID" />
+            </Principal>
+            <Dependent Role="BookInventory">
+              <PropertyRef Name="supplierID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOffer_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="1" />
+          <End Role="BookOffer" Type="Self.BookOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="BookOffer">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookStock_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="1" />
+          <End Role="BookStock" Type="Self.BookStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="BookStock">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetails_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetails_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cartID" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="cartID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetails_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cusID" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="cusID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="userID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderBookDetails_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetails" Multiplicity="1" />
+          <End Role="OrderBookDetails" Type="Self.OrderBookDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="OrderBookDetails">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderBookDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderBookDetails" Type="Self.OrderBookDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="OrderBookDetails">
+              <PropertyRef Name="ordID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cusID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="cusID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ordSttsID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ordSttsID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ordID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="payMethodID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="payMethodID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Return_ReturnRequest">
+          <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="1" />
+          <End Role="Return" Type="Self.Return" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReturnRequest">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="Return">
+              <PropertyRef Name="requestID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnRequest_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="ReturnRequest">
+              <PropertyRef Name="ordID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_OrderBookDetails">
+          <End Role="OrderBookDetails" Type="Self.OrderBookDetails" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderBookDetails">
+              <PropertyRef Name="ordBookDetailsID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ordBookDetailsID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserRole">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EBooks_DBModelStoreContainer">
+          <EntitySet Name="Admin" EntityType="Self.Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookCategory" EntityType="Self.BookCategory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookDetails" EntityType="Self.BookDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookInventory" EntityType="Self.BookInventory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookOffer" EntityType="Self.BookOffer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookStock" EntityType="Self.BookStock" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderBookDetails" EntityType="Self.OrderBookDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Payments" EntityType="Self.Payments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Return" EntityType="Self.Return" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ReturnRequest" EntityType="Self.ReturnRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review" EntityType="Self.Review" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supplier" EntityType="Self.Supplier" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Admin_User" Association="Self.FK_Admin_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Admin" EntitySet="Admin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookDetails_BookCategory" Association="Self.FK_BookDetails_BookCategory">
+            <End Role="BookCategory" EntitySet="BookCategory" />
+            <End Role="BookDetails" EntitySet="BookDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInventory_BookDetails" Association="Self.FK_BookInventory_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="BookInventory" EntitySet="BookInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInventory_Supplier" Association="Self.FK_BookInventory_Supplier">
+            <End Role="Supplier" EntitySet="Supplier" />
+            <End Role="BookInventory" EntitySet="BookInventory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOffer_BookDetails" Association="Self.FK_BookOffer_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="BookOffer" EntitySet="BookOffer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookStock_BookDetails" Association="Self.FK_BookStock_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="BookStock" EntitySet="BookStock" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetails_BookDetails" Association="Self.FK_CartDetails_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetails_Cart" Association="Self.FK_CartDetails_Cart">
+            <End Role="Cart" EntitySet="Cart" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetails_Customer" Association="Self.FK_CartDetails_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+            <End Role="User" EntitySet="User" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderBookDetails_BookDetails" Association="Self.FK_OrderBookDetails_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="OrderBookDetails" EntitySet="OrderBookDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderBookDetails_Orders" Association="Self.FK_OrderBookDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderBookDetails" EntitySet="OrderBookDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatus" Association="Self.FK_Orders_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Orders" Association="Self.FK_Payments_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_PaymentMethod" Association="Self.FK_Payments_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethod" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Return_ReturnRequest" Association="Self.FK_Return_ReturnRequest">
+            <End Role="ReturnRequest" EntitySet="ReturnRequest" />
+            <End Role="Return" EntitySet="Return" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnRequest_Orders" Association="Self.FK_ReturnRequest_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="ReturnRequest" EntitySet="ReturnRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_OrderBookDetails" Association="Self.FK_Review_OrderBookDetails">
+            <End Role="OrderBookDetails" EntitySet="OrderBookDetails" />
+            <End Role="Review" EntitySet="Review" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+            <End Role="UserRole" EntitySet="UserRole" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EBooks_DBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Admin">
+          <Key>
+            <PropertyRef Name="adminID" />
+          </Key>
+          <Property Name="adminID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contactNo" Type="Int32" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID_fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Admin_User" FromRole="Admin" ToRole="User" />
+        </EntityType>
+        <EntityType Name="BookCategory">
+          <Key>
+            <PropertyRef Name="bookCatID" />
+          </Key>
+          <Property Name="bookCatID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="category" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="BookDetails" Relationship="Self.FK_BookDetails_BookCategory" FromRole="BookCategory" ToRole="BookDetails" />
+        </EntityType>
+        <EntityType Name="BookDetail">
+          <Key>
+            <PropertyRef Name="bookID" />
+          </Key>
+          <Property Name="bookID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="author" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="genre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="publisher" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="pubYear" Type="Int32" Nullable="false" />
+          <Property Name="unitPrice" Type="Double" Nullable="false" />
+          <Property Name="description" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="bookCatID_fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BookCategory" Relationship="Self.FK_BookDetails_BookCategory" FromRole="BookDetails" ToRole="BookCategory" />
+          <NavigationProperty Name="BookInventories" Relationship="Self.FK_BookInventory_BookDetails" FromRole="BookDetails" ToRole="BookInventory" />
+          <NavigationProperty Name="BookOffers" Relationship="Self.FK_BookOffer_BookDetails" FromRole="BookDetails" ToRole="BookOffer" />
+          <NavigationProperty Name="BookStocks" Relationship="Self.FK_BookStock_BookDetails" FromRole="BookDetails" ToRole="BookStock" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK_CartDetails_BookDetails" FromRole="BookDetails" ToRole="CartDetails" />
+          <NavigationProperty Name="OrderBookDetails" Relationship="Self.FK_OrderBookDetails_BookDetails" FromRole="BookDetails" ToRole="OrderBookDetails" />
+        </EntityType>
+        <EntityType Name="BookInventory">
+          <Key>
+            <PropertyRef Name="inventID" />
+          </Key>
+          <Property Name="inventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookID_fk" Type="Int32" Nullable="false" />
+          <Property Name="supplierID_fk" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="purchasePrice" Type="Double" Nullable="false" />
+          <Property Name="salesPrice" Type="Double" Nullable="false" />
+          <Property Name="updatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BookDetail" Relationship="Self.FK_BookInventory_BookDetails" FromRole="BookInventory" ToRole="BookDetails" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_BookInventory_Supplier" FromRole="BookInventory" ToRole="Supplier" />
+        </EntityType>
+        <EntityType Name="BookOffer">
+          <Key>
+            <PropertyRef Name="offerID" />
+          </Key>
+          <Property Name="offerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookID_fk" Type="Int32" Nullable="false" />
+          <Property Name="offerPercent" Type="Double" Nullable="false" />
+          <Property Name="updatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BookDetail" Relationship="Self.FK_BookOffer_BookDetails" FromRole="BookOffer" ToRole="BookDetails" />
+        </EntityType>
+        <EntityType Name="BookStock">
+          <Key>
+            <PropertyRef Name="stockID" />
+          </Key>
+          <Property Name="stockID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bookID_fk" Type="Int32" Nullable="false" />
+          <Property Name="availableQty" Type="Int32" Nullable="false" />
+          <Property Name="updatedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="BookDetail" Relationship="Self.FK_BookStock_BookDetails" FromRole="BookStock" ToRole="BookDetails" />
+        </EntityType>
+        <EntityType Name="Cart">
+          <Key>
+            <PropertyRef Name="cartID" />
+          </Key>
+          <Property Name="cartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="totalAmount" Type="Double" Nullable="false" />
+          <Property Name="updatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK_CartDetails_Cart" FromRole="Cart" ToRole="CartDetails" />
+        </EntityType>
+        <EntityType Name="CartDetail">
+          <Key>
+            <PropertyRef Name="cartDetailsID" />
+          </Key>
+          <Property Name="cartDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cartID_fk" Type="Int32" Nullable="false" />
+          <Property Name="cusID_fk" Type="Int32" Nullable="false" />
+          <Property Name="bookID_fk" Type="Int32" Nullable="false" />
+          <Property Name="addedDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BookDetail" Relationship="Self.FK_CartDetails_BookDetails" FromRole="CartDetails" ToRole="BookDetails" />
+          <NavigationProperty Name="Cart" Relationship="Self.FK_CartDetails_Cart" FromRole="CartDetails" ToRole="Cart" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_CartDetails_Customer" FromRole="CartDetails" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cusID" />
+          </Key>
+          <Property Name="cusID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="nic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contactNo" Type="Int32" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID_fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="CartDetails" Relationship="Self.FK_CartDetails_Customer" FromRole="Customer" ToRole="CartDetails" />
+          <NavigationProperty Name="User" Relationship="Self.FK_Customer_User" FromRole="Customer" ToRole="User" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customer" FromRole="Customer" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="OrderBookDetail">
+          <Key>
+            <PropertyRef Name="ordBookDetailsID" />
+          </Key>
+          <Property Name="ordBookDetailsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ordID_fk" Type="Int32" Nullable="false" />
+          <Property Name="bookID_fk" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" Nullable="false" />
+          <Property Name="totalPrice" Type="Double" Nullable="false" />
+          <NavigationProperty Name="BookDetail" Relationship="Self.FK_OrderBookDetails_BookDetails" FromRole="OrderBookDetails" ToRole="BookDetails" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderBookDetails_Orders" FromRole="OrderBookDetails" ToRole="Orders" />
+          <NavigationProperty Name="Reviews" Relationship="Self.FK_Review_OrderBookDetails" FromRole="OrderBookDetails" ToRole="Review" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cusID_fk" Type="Int32" Nullable="false" />
+          <Property Name="totalAmount" Type="Double" Nullable="false" />
+          <Property Name="dateOfOrder" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ordSttsID_fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customer" FromRole="Orders" ToRole="Customer" />
+          <NavigationProperty Name="OrderBookDetails" Relationship="Self.FK_OrderBookDetails_Orders" FromRole="Orders" ToRole="OrderBookDetails" />
+          <NavigationProperty Name="OrderStatu" Relationship="Self.FK_Orders_OrderStatus" FromRole="Orders" ToRole="OrderStatus" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_Orders" FromRole="Orders" ToRole="Payments" />
+          <NavigationProperty Name="ReturnRequests" Relationship="Self.FK_ReturnRequest_Orders" FromRole="Orders" ToRole="ReturnRequest" />
+        </EntityType>
+        <EntityType Name="OrderStatu">
+          <Key>
+            <PropertyRef Name="ordSttsID" />
+          </Key>
+          <Property Name="ordSttsID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_OrderStatus" FromRole="OrderStatus" ToRole="Orders" />
+        </EntityType>
+        <EntityType Name="PaymentMethod">
+          <Key>
+            <PropertyRef Name="payMethodID" />
+          </Key>
+          <Property Name="payMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="method" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Payments" Relationship="Self.FK_Payments_PaymentMethod" FromRole="PaymentMethod" ToRole="Payments" />
+        </EntityType>
+        <EntityType Name="Payment">
+          <Key>
+            <PropertyRef Name="payID" />
+          </Key>
+          <Property Name="payID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ordID_fk" Type="Int32" Nullable="false" />
+          <Property Name="amount" Type="Double" Nullable="false" />
+          <Property Name="dateOfPay" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="payMethodID_fk" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Payments_Orders" FromRole="Payments" ToRole="Orders" />
+          <NavigationProperty Name="PaymentMethod" Relationship="Self.FK_Payments_PaymentMethod" FromRole="Payments" ToRole="PaymentMethod" />
+        </EntityType>
+        <EntityType Name="Return">
+          <Key>
+            <PropertyRef Name="returnID" />
+          </Key>
+          <Property Name="returnID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="requestID_fk" Type="Int32" Nullable="false" />
+          <Property Name="returnDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="refundAmount" Type="Double" Nullable="false" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ReturnRequest" Relationship="Self.FK_Return_ReturnRequest" FromRole="Return" ToRole="ReturnRequest" />
+        </EntityType>
+        <EntityType Name="ReturnRequest">
+          <Key>
+            <PropertyRef Name="requestID" />
+          </Key>
+          <Property Name="requestID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ordID_fk" Type="Int32" Nullable="false" />
+          <Property Name="reason" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="dateOfRequest" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_ReturnRequest_Orders" FromRole="ReturnRequest" ToRole="Orders" />
+          <NavigationProperty Name="Returns" Relationship="Self.FK_Return_ReturnRequest" FromRole="ReturnRequest" ToRole="Return" />
+        </EntityType>
+        <EntityType Name="Review">
+          <Key>
+            <PropertyRef Name="reviewID" />
+          </Key>
+          <Property Name="reviewID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ordBookDetailsID_fk" Type="Int32" Nullable="false" />
+          <Property Name="comments" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="rating" Type="Double" Nullable="false" />
+          <Property Name="dateOfReview" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="OrderBookDetail" Relationship="Self.FK_Review_OrderBookDetails" FromRole="Review" ToRole="OrderBookDetails" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="supplierID" />
+          </Key>
+          <Property Name="supplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contactNo" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BookInventories" Relationship="Self.FK_BookInventory_Supplier" FromRole="Supplier" ToRole="BookInventory" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="roleID_fk" Type="Int32" Nullable="false" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="createdDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="updatedDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Admins" Relationship="Self.FK_Admin_User" FromRole="User" ToRole="Admin" />
+          <NavigationProperty Name="Customers" Relationship="Self.FK_Customer_User" FromRole="User" ToRole="Customer" />
+          <NavigationProperty Name="UserRole" Relationship="Self.FK_User_UserRole" FromRole="User" ToRole="UserRole" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="roleID" />
+          </Key>
+          <Property Name="roleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="Self.FK_User_UserRole" FromRole="UserRole" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_Admin_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Admin" Type="Self.Admin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Admin">
+              <PropertyRef Name="userID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookDetails_BookCategory">
+          <End Role="BookCategory" Type="Self.BookCategory" Multiplicity="1" />
+          <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookCategory">
+              <PropertyRef Name="bookCatID" />
+            </Principal>
+            <Dependent Role="BookDetails">
+              <PropertyRef Name="bookCatID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInventory_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="1" />
+          <End Role="BookInventory" Type="Self.BookInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="BookInventory">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookOffer_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="1" />
+          <End Role="BookOffer" Type="Self.BookOffer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="BookOffer">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookStock_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="1" />
+          <End Role="BookStock" Type="Self.BookStock" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="BookStock">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetails_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderBookDetails_BookDetails">
+          <End Role="BookDetails" Type="Self.BookDetail" Multiplicity="1" />
+          <End Role="OrderBookDetails" Type="Self.OrderBookDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BookDetails">
+              <PropertyRef Name="bookID" />
+            </Principal>
+            <Dependent Role="OrderBookDetails">
+              <PropertyRef Name="bookID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookInventory_Supplier">
+          <End Role="Supplier" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="BookInventory" Type="Self.BookInventory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="supplierID" />
+            </Principal>
+            <Dependent Role="BookInventory">
+              <PropertyRef Name="supplierID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetails_Cart">
+          <End Role="Cart" Type="Self.Cart" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cart">
+              <PropertyRef Name="cartID" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="cartID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CartDetails_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="CartDetails" Type="Self.CartDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cusID" />
+            </Principal>
+            <Dependent Role="CartDetails">
+              <PropertyRef Name="cusID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_User">
+          <End Role="User" Type="Self.User" Multiplicity="1" />
+          <End Role="Customer" Type="Self.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="userID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customer">
+          <End Role="Customer" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="cusID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="cusID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderBookDetails_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderBookDetails" Type="Self.OrderBookDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="OrderBookDetails">
+              <PropertyRef Name="ordID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Review_OrderBookDetails">
+          <End Role="OrderBookDetails" Type="Self.OrderBookDetail" Multiplicity="1" />
+          <End Role="Review" Type="Self.Review" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderBookDetails">
+              <PropertyRef Name="ordBookDetailsID" />
+            </Principal>
+            <Dependent Role="Review">
+              <PropertyRef Name="ordBookDetailsID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_OrderStatus">
+          <End Role="OrderStatus" Type="Self.OrderStatu" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderStatus">
+              <PropertyRef Name="ordSttsID" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="ordSttsID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="ordID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ReturnRequest_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="orderID" />
+            </Principal>
+            <Dependent Role="ReturnRequest">
+              <PropertyRef Name="ordID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Payments_PaymentMethod">
+          <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="1" />
+          <End Role="Payments" Type="Self.Payment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PaymentMethod">
+              <PropertyRef Name="payMethodID" />
+            </Principal>
+            <Dependent Role="Payments">
+              <PropertyRef Name="payMethodID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Return_ReturnRequest">
+          <End Role="ReturnRequest" Type="Self.ReturnRequest" Multiplicity="1" />
+          <End Role="Return" Type="Self.Return" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ReturnRequest">
+              <PropertyRef Name="requestID" />
+            </Principal>
+            <Dependent Role="Return">
+              <PropertyRef Name="requestID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_UserRole">
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="1" />
+          <End Role="User" Type="Self.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserRole">
+              <PropertyRef Name="roleID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="roleID_fk" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="EBooks_DBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Admins" EntityType="Self.Admin" />
+          <EntitySet Name="BookCategories" EntityType="Self.BookCategory" />
+          <EntitySet Name="BookDetails" EntityType="Self.BookDetail" />
+          <EntitySet Name="BookInventories" EntityType="Self.BookInventory" />
+          <EntitySet Name="BookOffers" EntityType="Self.BookOffer" />
+          <EntitySet Name="BookStocks" EntityType="Self.BookStock" />
+          <EntitySet Name="Carts" EntityType="Self.Cart" />
+          <EntitySet Name="CartDetails" EntityType="Self.CartDetail" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="OrderBookDetails" EntityType="Self.OrderBookDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="OrderStatus" EntityType="Self.OrderStatu" />
+          <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
+          <EntitySet Name="Payments" EntityType="Self.Payment" />
+          <EntitySet Name="Returns" EntityType="Self.Return" />
+          <EntitySet Name="ReturnRequests" EntityType="Self.ReturnRequest" />
+          <EntitySet Name="Reviews" EntityType="Self.Review" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="UserRoles" EntityType="Self.UserRole" />
+          <AssociationSet Name="FK_Admin_User" Association="Self.FK_Admin_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Admin" EntitySet="Admins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookDetails_BookCategory" Association="Self.FK_BookDetails_BookCategory">
+            <End Role="BookCategory" EntitySet="BookCategories" />
+            <End Role="BookDetails" EntitySet="BookDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInventory_BookDetails" Association="Self.FK_BookInventory_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="BookInventory" EntitySet="BookInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookOffer_BookDetails" Association="Self.FK_BookOffer_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="BookOffer" EntitySet="BookOffers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookStock_BookDetails" Association="Self.FK_BookStock_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="BookStock" EntitySet="BookStocks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetails_BookDetails" Association="Self.FK_CartDetails_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderBookDetails_BookDetails" Association="Self.FK_OrderBookDetails_BookDetails">
+            <End Role="BookDetails" EntitySet="BookDetails" />
+            <End Role="OrderBookDetails" EntitySet="OrderBookDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookInventory_Supplier" Association="Self.FK_BookInventory_Supplier">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="BookInventory" EntitySet="BookInventories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetails_Cart" Association="Self.FK_CartDetails_Cart">
+            <End Role="Cart" EntitySet="Carts" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CartDetails_Customer" Association="Self.FK_CartDetails_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CartDetails" EntitySet="CartDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_User" Association="Self.FK_Customer_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customer" Association="Self.FK_Orders_Customer">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderBookDetails_Orders" Association="Self.FK_OrderBookDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderBookDetails" EntitySet="OrderBookDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Review_OrderBookDetails" Association="Self.FK_Review_OrderBookDetails">
+            <End Role="OrderBookDetails" EntitySet="OrderBookDetails" />
+            <End Role="Review" EntitySet="Reviews" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_OrderStatus" Association="Self.FK_Orders_OrderStatus">
+            <End Role="OrderStatus" EntitySet="OrderStatus" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_Orders" Association="Self.FK_Payments_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ReturnRequest_Orders" Association="Self.FK_ReturnRequest_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="ReturnRequest" EntitySet="ReturnRequests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Payments_PaymentMethod" Association="Self.FK_Payments_PaymentMethod">
+            <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+            <End Role="Payments" EntitySet="Payments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Return_ReturnRequest" Association="Self.FK_Return_ReturnRequest">
+            <End Role="ReturnRequest" EntitySet="ReturnRequests" />
+            <End Role="Return" EntitySet="Returns" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_UserRole" Association="Self.FK_User_UserRole">
+            <End Role="UserRole" EntitySet="UserRoles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="EBooks_DBModelStoreContainer" CdmEntityContainer="EBooks_DBEntities">
+          <EntitySetMapping Name="Admins">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Admin">
+              <MappingFragment StoreEntitySet="Admin">
+                <ScalarProperty Name="adminID" ColumnName="adminID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="nic" ColumnName="nic" />
+                <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="userID_fk" ColumnName="userID_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookCategories">
+            <EntityTypeMapping TypeName="EBooks_DBModel.BookCategory">
+              <MappingFragment StoreEntitySet="BookCategory">
+                <ScalarProperty Name="bookCatID" ColumnName="bookCatID" />
+                <ScalarProperty Name="category" ColumnName="category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookDetails">
+            <EntityTypeMapping TypeName="EBooks_DBModel.BookDetail">
+              <MappingFragment StoreEntitySet="BookDetails">
+                <ScalarProperty Name="bookID" ColumnName="bookID" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="author" ColumnName="author" />
+                <ScalarProperty Name="genre" ColumnName="genre" />
+                <ScalarProperty Name="publisher" ColumnName="publisher" />
+                <ScalarProperty Name="pubYear" ColumnName="pubYear" />
+                <ScalarProperty Name="unitPrice" ColumnName="unitPrice" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="bookCatID_fk" ColumnName="bookCatID_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookInventories">
+            <EntityTypeMapping TypeName="EBooks_DBModel.BookInventory">
+              <MappingFragment StoreEntitySet="BookInventory">
+                <ScalarProperty Name="inventID" ColumnName="inventID" />
+                <ScalarProperty Name="bookID_fk" ColumnName="bookID_fk" />
+                <ScalarProperty Name="supplierID_fk" ColumnName="supplierID_fk" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="purchasePrice" ColumnName="purchasePrice" />
+                <ScalarProperty Name="salesPrice" ColumnName="salesPrice" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookOffers">
+            <EntityTypeMapping TypeName="EBooks_DBModel.BookOffer">
+              <MappingFragment StoreEntitySet="BookOffer">
+                <ScalarProperty Name="offerID" ColumnName="offerID" />
+                <ScalarProperty Name="bookID_fk" ColumnName="bookID_fk" />
+                <ScalarProperty Name="offerPercent" ColumnName="offerPercent" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookStocks">
+            <EntityTypeMapping TypeName="EBooks_DBModel.BookStock">
+              <MappingFragment StoreEntitySet="BookStock">
+                <ScalarProperty Name="stockID" ColumnName="stockID" />
+                <ScalarProperty Name="bookID_fk" ColumnName="bookID_fk" />
+                <ScalarProperty Name="availableQty" ColumnName="availableQty" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Carts">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Cart">
+              <MappingFragment StoreEntitySet="Cart">
+                <ScalarProperty Name="cartID" ColumnName="cartID" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CartDetails">
+            <EntityTypeMapping TypeName="EBooks_DBModel.CartDetail">
+              <MappingFragment StoreEntitySet="CartDetails">
+                <ScalarProperty Name="cartDetailsID" ColumnName="cartDetailsID" />
+                <ScalarProperty Name="cartID_fk" ColumnName="cartID_fk" />
+                <ScalarProperty Name="cusID_fk" ColumnName="cusID_fk" />
+                <ScalarProperty Name="bookID_fk" ColumnName="bookID_fk" />
+                <ScalarProperty Name="addedDate" ColumnName="addedDate" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="cusID" ColumnName="cusID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="nic" ColumnName="nic" />
+                <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="userID_fk" ColumnName="userID_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderBookDetails">
+            <EntityTypeMapping TypeName="EBooks_DBModel.OrderBookDetail">
+              <MappingFragment StoreEntitySet="OrderBookDetails">
+                <ScalarProperty Name="ordBookDetailsID" ColumnName="ordBookDetailsID" />
+                <ScalarProperty Name="ordID_fk" ColumnName="ordID_fk" />
+                <ScalarProperty Name="bookID_fk" ColumnName="bookID_fk" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="cusID_fk" ColumnName="cusID_fk" />
+                <ScalarProperty Name="totalAmount" ColumnName="totalAmount" />
+                <ScalarProperty Name="dateOfOrder" ColumnName="dateOfOrder" />
+                <ScalarProperty Name="ordSttsID_fk" ColumnName="ordSttsID_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderStatus">
+            <EntityTypeMapping TypeName="EBooks_DBModel.OrderStatu">
+              <MappingFragment StoreEntitySet="OrderStatus">
+                <ScalarProperty Name="ordSttsID" ColumnName="ordSttsID" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentMethods">
+            <EntityTypeMapping TypeName="EBooks_DBModel.PaymentMethod">
+              <MappingFragment StoreEntitySet="PaymentMethod">
+                <ScalarProperty Name="payMethodID" ColumnName="payMethodID" />
+                <ScalarProperty Name="method" ColumnName="method" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Payments">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Payment">
+              <MappingFragment StoreEntitySet="Payments">
+                <ScalarProperty Name="payID" ColumnName="payID" />
+                <ScalarProperty Name="ordID_fk" ColumnName="ordID_fk" />
+                <ScalarProperty Name="amount" ColumnName="amount" />
+                <ScalarProperty Name="dateOfPay" ColumnName="dateOfPay" />
+                <ScalarProperty Name="payMethodID_fk" ColumnName="payMethodID_fk" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Returns">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Return">
+              <MappingFragment StoreEntitySet="Return">
+                <ScalarProperty Name="returnID" ColumnName="returnID" />
+                <ScalarProperty Name="requestID_fk" ColumnName="requestID_fk" />
+                <ScalarProperty Name="returnDate" ColumnName="returnDate" />
+                <ScalarProperty Name="refundAmount" ColumnName="refundAmount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ReturnRequests">
+            <EntityTypeMapping TypeName="EBooks_DBModel.ReturnRequest">
+              <MappingFragment StoreEntitySet="ReturnRequest">
+                <ScalarProperty Name="requestID" ColumnName="requestID" />
+                <ScalarProperty Name="ordID_fk" ColumnName="ordID_fk" />
+                <ScalarProperty Name="reason" ColumnName="reason" />
+                <ScalarProperty Name="dateOfRequest" ColumnName="dateOfRequest" />
+                <ScalarProperty Name="status" ColumnName="status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reviews">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Review">
+              <MappingFragment StoreEntitySet="Review">
+                <ScalarProperty Name="reviewID" ColumnName="reviewID" />
+                <ScalarProperty Name="ordBookDetailsID_fk" ColumnName="ordBookDetailsID_fk" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="rating" ColumnName="rating" />
+                <ScalarProperty Name="dateOfReview" ColumnName="dateOfReview" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="EBooks_DBModel.Supplier">
+              <MappingFragment StoreEntitySet="Supplier">
+                <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="mail" ColumnName="mail" />
+                <ScalarProperty Name="contactNo" ColumnName="contactNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="EBooks_DBModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="roleID_fk" ColumnName="roleID_fk" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="createdDate" ColumnName="createdDate" />
+                <ScalarProperty Name="updatedDate" ColumnName="updatedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserRoles">
+            <EntityTypeMapping TypeName="EBooks_DBModel.UserRole">
+              <MappingFragment StoreEntitySet="UserRole">
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

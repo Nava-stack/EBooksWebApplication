@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9361f605263940c080eb56662d9d9d4d" Name="Diagram1">
+        <EntityTypeShape EntityType="EBooks_DBModel.Admin" Width="1.5" PointX="3.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.BookCategory" Width="1.5" PointX="0.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.BookDetail" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.BookInventory" Width="1.5" PointX="5.25" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.BookOffer" Width="1.5" PointX="5.25" PointY="12" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.BookStock" Width="1.5" PointX="5.25" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Cart" Width="1.5" PointX="6" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.CartDetail" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Customer" Width="1.5" PointX="3.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.OrderBookDetail" Width="1.5" PointX="8.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Order" Width="1.5" PointX="6" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.OrderStatu" Width="1.5" PointX="3.75" PointY="18.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.PaymentMethod" Width="1.5" PointX="9" PointY="13.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Payment" Width="1.5" PointX="11.25" PointY="2.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Return" Width="1.5" PointX="10.5" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.ReturnRequest" Width="1.5" PointX="8.25" PointY="1.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Review" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.Supplier" Width="1.5" PointX="3" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.User" Width="1.5" PointX="1.5" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="EBooks_DBModel.UserRole" Width="1.5" PointX="1.5" PointY="2.25" IsExpanded="true" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Admin_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_BookDetails_BookCategory" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_BookInventory_BookDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_BookOffer_BookDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_BookStock_BookDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_CartDetails_BookDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_OrderBookDetails_BookDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_BookInventory_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_CartDetails_Cart" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_CartDetails_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Customer_User" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Orders_Customer" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_OrderBookDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Review_OrderBookDetails" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Orders_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Payments_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_ReturnRequest_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Payments_PaymentMethod" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_Return_ReturnRequest" ManuallyRouted="false" />
+        <AssociationConnector Association="EBooks_DBModel.FK_User_UserRole" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
