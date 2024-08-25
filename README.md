@@ -1,8 +1,8 @@
-# E-Book Pvt. Ltd. Online Bookresellar store
+# E-Books Pvt Ltd. Online Bookresellar Application
 
 ## Project Overview
 
-E-Book Pvt. Ltd. is a leading used book retailer, offering a vast collection of local and foreign used books. To expand their business and enhance customer experience, they have developed an online web application with a range of functionalities for both customers and administrators.
+E-Books Pvt Ltd. is a leading used book retailer, offering a vast collection of local and foreign used books. To expand their business and enhance customer experience, they have developed an online web application with a range of functionalities for both customers and administrators.
 
 <p align="center">
   <img src="index.png" alt="System">
